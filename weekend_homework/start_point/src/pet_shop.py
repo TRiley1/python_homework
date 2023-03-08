@@ -69,20 +69,35 @@ def customer_can_afford_pet(customer, new_pet):
         return True
     return False
     
+#  it would be better to just use >= this evaluates to either 'true' or 'false' -- This is what you are doing but alot less wordy.
 # on to 'integration' tests. Multiple conditions! 
+
+# def sell_pet_to_customer(pet_shop, pet, customer):
+    
+#     if pet not in pet_shop["pets"] or customer["cash"] < pet["price"]:
+#         return None
+    
+#     pet_price = pet["price"]
+#     # access customer pets .. append pet there 
+#     customer["pets"].append(pet)
+#     # access pets_sold add 1
+#     pet_shop["admin"]["pets_sold"] += 1
+#     # remove pet price from customer money 
+#     customer["cash"] -= pet_price
+#     # increase total shop money by pet price
+#     pet_shop["admin"]["total_cash"] += pet_price
 
 def sell_pet_to_customer(pet_shop, pet, customer):
     
-    if pet not in pet_shop["pets"] or customer["cash"] < pet["price"]:
+    if pet not in pet_shop["pets"] or customer_can_afford_pet(customer,pet):
         return None
     
     pet_price = pet["price"]
     # access customer pets .. append pet there 
-    customer["pets"].append(pet)
-    # access pets_sold add 1
-    pet_shop["admin"]["pets_sold"] += 1
+    add_pet_to_customer(customer, pet)
+    # increase the pet_sold
+    increase_pets_sold(pet_shop, 1)
     # remove pet price from customer money 
-    customer["cash"] -= pet_price
+    remove_customer_cash(customer, pet_price)
     # increase total shop money by pet price
-    pet_shop["admin"]["total_cash"] += pet_price
-
+    get_total_cash(pet_shop) + pet_price
