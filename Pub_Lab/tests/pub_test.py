@@ -7,8 +7,8 @@ from src.customer import Customer
 class TestPub(unittest.TestCase):
     def setUp(self):
         self.pub = Pub("The Crass Badger", 100.00)
-        self.drink = Drink("Beer", 3.00, 3)
-        self.drink2 = Drink("Paint Stripper", 2.00, 20)
+        self.drink = Drink("Beer", 3.00, 3, 5)
+        self.drink2 = Drink("Paint Stripper", 2.00, 20, 50)
         self.customer = Customer("Jammo", 24, 10.00)
         self.customer2 = Customer("Timmy",12, 5.00)
 
@@ -39,3 +39,9 @@ class TestPub(unittest.TestCase):
         self.pub.drinks.append(self.drink)
         self.pub.drinks.append(self.drink2)
         self.assertEqual([self.drink, self.drink2], self.pub.drinks_list())
+
+    def test_check_stock_level(self):
+        level = self.pub.check_stock_level(self.drink)
+        self.assertEqual(5, level)
+        
+    # write a test for reducing stock level

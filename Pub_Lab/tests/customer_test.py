@@ -7,8 +7,8 @@ from src.pub import Pub
 class TestCustomer(unittest.TestCase):
     def setUp(self):
         self.customer = Customer("Jammo",23, 10.00)
-        self.drink = Drink("beer", 3.00, 3)
-        self.drink2 = Drink("wine", 5.00, 5)
+        self.drink = Drink("beer", 3.00, 3, 5)
+        self.drink2 = Drink("wine", 5.00, 5, 5)
         self.pub = Pub("The Crass Badger", 100.00)
 
     def test_customer_name(self):

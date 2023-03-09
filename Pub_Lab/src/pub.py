@@ -15,8 +15,11 @@ class Pub:
             customer.buy_drink(drink)
         return "NO!!"
 
-
+    def check_stock_level(self, drink):
+        return drink.stock
     # and alcohol_level < 10:
 
     def drinks_list(self):
         return self.drinks
+    
+    # write a function to decrease the stock level. 
