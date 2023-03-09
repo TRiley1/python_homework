@@ -34,3 +34,8 @@ class TestPub(unittest.TestCase):
         self.customer.drunkness_level(self.drink2)
         decline = self.pub.sell_drink(self.drink, self.customer)
         self.assertEqual("NO!!", decline)
+
+    def test_return_drink_list(self):
+        self.pub.drinks.append(self.drink)
+        self.pub.drinks.append(self.drink2)
+        self.assertEqual([self.drink, self.drink2], self.pub.drinks_list())

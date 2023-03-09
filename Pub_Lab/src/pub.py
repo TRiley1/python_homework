@@ -17,3 +17,6 @@ class Pub:
 
 
     # and alcohol_level < 10:
+
+    def drinks_list(self):
+        return self.drinks
