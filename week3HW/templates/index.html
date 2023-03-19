@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <title> {{ title }}</title>
+    </head>
+    <body>
+        <h1 class="heading"> {{ title }} - Hand Illustrated Classic books</h1>
+        <div class="pfft">
+            <div class = "book-card">
+                {% for book in books %}
+                    <div class = "indiv-book-card">
+                        <div class= "title"><h1>{{book.title}}</h1></div>
+                        <div><img class="img"src = "{{book.image}}" /></div>
+                        <div class= "author"><h2>{{book.author}}</h2></div>
+                        <div class= "genre"><h2>{{book.genre}}</h2></div>
+                        <div class="bottom-book">
+                            <div>
+                                {% if book.checkout: %}
+                                <img src = "/static/images/no.png" alt ="Not availble" width="25" height="25">
+                                {%else%}
+                                <img src = "/static/images/yes.png" alt ="Not availble" width="25" height="25">
+                                {% endif %}
+                            </div>
+                            <a href="books/ {{books.index(book)}}"><img src="/static/images/more.png" width="25" height="25"></a>
+                            <form action="/books/{{books.index(book)}}/delete" method="post">
+                                <!-- <input class="remove" type="submit" value="/" id="remove"> -->
+                                <input type="image" src="/static/images/x.png" alt="Submit" width="25" height="25">
+                            </form> 
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>   
+
+        <div class = "form-box">
+            <form action="/books" method="post">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title">
+                <label for="image">Image:</label>
+                <input type="text" name="image" id="image" />
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="author">
+                <label for="genre">Genre:</label>
+                <input type="text" name="genre" id="genre">
+                <input class ="add" type="submit" value="Add Book">
+            </form>
+        </div>
+
+
+        
+        
+        <!-- <form action="/books/delete" method="post">
+            <label for="name">Title:</label>
+            <input type="text" name="bookTitle" id="bookTitle">
+            <input type="submit" value = "Remove Book">
+        </form> -->
+
+        <!-- <form action="/books" method="post">
+            <label for="name">Title:</label>
+            <input type="text" name="name" id="name">
+            <input type="submit" value = "Remove Book">
+        </form> -->
+    </body>
+</html>
