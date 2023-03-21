@@ -15,3 +15,19 @@ def save(album):
 def delete_all():
     sql = "DELETE from albums"
     run_sql(sql)
+
+def select(id):
+    album = None
+    sql = "SELECT * FROM albums WHERE id = %s"
+    values = [id]
+    results = run_sql(sql, values)
+
+    if len(results) > 0:
+        selected_artist = results[0]
+        album = Album(
+            selected_artist['title'],
+            selected_artist['genre'],
+            selected_artist['artist']
+        )
+
+    return album
