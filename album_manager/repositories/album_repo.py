@@ -1,6 +1,6 @@
 from db.run_sql import run_sql
 from models.album import Album
-
+import repositories.artist_repo as artist_repo
 # I want to create an album 
 
 def select_all():
@@ -9,14 +9,15 @@ def select_all():
     results = run_sql(sql)
 
     for row in results:
-        new_album = Album(row['title'], row['genre'], row['artist'])
+        artist = artist_repo.select(row['artist_id'])
+        new_album = Album(row['title'], row['genre'], artist)
         albums.append(new_album)
 
     return albums
 
 def save(album):
-    sql = "INSERT INTO albums (title, genre, artist) VALUES (%s,%s,%s) RETURNING *"
-    values = [album.title, album.genre, album.artist]
+    sql = "INSERT INTO albums (title, genre, artist_id) VALUES (%s,%s,%s) RETURNING *"
+    values = [album.title, album.genre, album.artist.id]
     results = run_sql(sql, values)
 
     id = results[0]['id']
@@ -35,10 +36,11 @@ def select(id):
 
     if len(results) > 0:
         selected_artist = results[0]
+        artist = artist_repo.selected_artist(['artist_id'])
         album = Album(
             selected_artist['title'],
             selected_artist['genre'],
-            selected_artist['artist']
+            artist
         )
 
     return album

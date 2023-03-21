@@ -21,7 +21,7 @@ print(art)
 albu = album_repo.select(6)
 print(albu)
 
-album1 = Album("Boo", "Horror Rock", "Ghost")
+album1 = Album("Boo", "Horror Rock", artist1)
 album_repo.save(album1)
 # this result is a list that was define in artist_repo select_all()
 # result = artist_repo.select_all()
