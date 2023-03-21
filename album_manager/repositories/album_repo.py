@@ -44,3 +44,13 @@ def select(id):
         )
 
     return album
+
+def list_all(artist):
+    sql = "SELECT title FROM albums WHERE artist_id = %s"
+    values = [artist.id]
+    results = run_sql(sql, values)
+    album_list = []
+
+    for artist in results:
+        album = Album(row['title'], row['genre'], artist)
+        album_list.append(album)
