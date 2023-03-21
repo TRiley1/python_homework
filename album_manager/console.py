@@ -28,3 +28,8 @@ album_repo.save(album1)
 
 # for artist in result: 
 #     print(artist.name)
+
+results = album_repo.select_all()
+
+for album in results:
+    print(album.title)

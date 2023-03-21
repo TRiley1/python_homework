@@ -3,6 +3,17 @@ from models.album import Album
 
 # I want to create an album 
 
+def select_all():
+    albums = []
+    sql  = "SELECT * FROM albums"
+    results = run_sql(sql)
+
+    for row in results:
+        new_album = Album(row['title'], row['genre'], row['artist'])
+        albums.append(new_album)
+
+    return albums
+
 def save(album):
     sql = "INSERT INTO albums (title, genre, artist) VALUES (%s,%s,%s) RETURNING *"
     values = [album.title, album.genre, album.artist]
